@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de Resistencias Comerciales · ESIME Zacatenco</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="top">
+    <div class="top-inner">
+      <div class="logo-box">
+        <img src="logo-ipn.png" alt="Logo del IPN"
+             onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
+        <span class="logo-ph" hidden>Logo IPN<small>logo-ipn.png</small></span>
+      </div>
+
+      <div class="titles">
+        <p class="inst">Instituto Politécnico Nacional · ESIME Zacatenco</p>
+        <h1>Calculadora de Resistencias Comerciales</h1>
+        <p class="sub">Valor comercial más cercano con 1, 2 o 3 resistencias en todas las combinaciones serie-paralelo.</p>
+        <p class="author">Zuar Zaret Arrucha Fernandez</p>
+      </div>
+
+      <div class="logo-box">
+        <img src="logo-esime.png" alt="Logo de ESIME Zacatenco"
+             onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
+        <span class="logo-ph" hidden>Logo ESIME Zacatenco<small>logo-esime.png</small></span>
+      </div>
+    </div>
+    <div class="flag-bar"><i></i><i></i><i></i></div>
+  </header>
+
+  <main>
+    <section class="card form-card">
+      <form id="form" autocomplete="off">
+        <div class="field grow">
+          <label for="valor">Valor de resistencia deseado</label>
+          <div class="input-row">
+            <input id="valor" type="text" inputmode="decimal" placeholder="Ej. 3.3" value="3.3" required>
+            <select id="unidad" aria-label="Unidad">
+              <option value="1">Ω</option>
+              <option value="1000" selected>kΩ</option>
+              <option value="1000000">MΩ</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Tolerancia</label>
+          <div class="segmented">
+            <input type="radio" name="tol" id="tol10" value="10" checked>
+            <label for="tol10">10 % <small>E12</small></label>
+            <input type="radio" name="tol" id="tol1" value="1">
+            <label for="tol1">1 % <small>E96</small></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Máx. resistencias</label>
+          <div class="segmented">
+            <input type="radio" name="maxn" id="n1" value="1">
+            <label for="n1">1</label>
+            <input type="radio" name="maxn" id="n2" value="2">
+            <label for="n2">2</label>
+            <input type="radio" name="maxn" id="n3" value="3" checked>
+            <label for="n3">3</label>
+          </div>
+        </div>
+
+        <button type="submit" id="btn">Calcular</button>
+      </form>
+
+      <div class="chips">
+        <span>Ejemplos:</span>
+        <button type="button" class="chip" data-v="2.7" data-u="1000">2.7 kΩ</button>
+        <button type="button" class="chip" data-v="125" data-u="1">125 Ω</button>
+        <button type="button" class="chip" data-v="6.2" data-u="1000">6.2 kΩ</button>
+        <button type="button" class="chip" data-v="0.75" data-u="1000000">750 kΩ</button>
+        <button type="button" class="chip" data-v="33.3" data-u="1">33.3 Ω</button>
+      </div>
+      <p id="msg" class="msg" role="alert" hidden></p>
+    </section>
+
+    <section id="results" hidden>
+      <article class="card hero" id="hero"></article>
+
+      <h2 class="section-title">Mejor resultado por configuración</h2>
+      <div id="kinds" class="kinds"></div>
+
+      <h2 class="section-title">Combinaciones más cercanas</h2>
+      <div class="card table-card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>#</th><th>Configuración</th><th>Resistencias</th><th>Equivalente</th><th>Error</th></tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+        <p class="hint">Haz clic en una fila o tarjeta para ver su circuito arriba.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>10 % → serie E12 · 1 % → serie E96 · Rango de valores comerciales: 1 Ω a 10 MΩ.
+       Configuraciones de 3 resistencias: serie, paralelo, R + (R ∥ R) y R ∥ (R + R).</p>
+    <p class="foot-author">Desarrollado por <strong>Zuar Zaret Arrucha Fernandez</strong> · ESIME Zacatenco, IPN</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
